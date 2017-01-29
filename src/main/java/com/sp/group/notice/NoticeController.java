@@ -36,7 +36,7 @@ public class NoticeController {
 	@Autowired 
 	private FileManager fileManager;
 
-	@RequestMapping(value = "/notice")
+	@RequestMapping(value = "/gnotice")
 	public String noticeList(
 			@RequestParam(value="num", defaultValue = "1") int num,
 			@RequestParam(value = "page", defaultValue = "1") int current_page,
@@ -102,14 +102,14 @@ public class NoticeController {
 		}
 		
 		String params = "";
-        String urlList = cp+"/notice";
+        String urlList = cp+"/gnotice";
         if(searchValue.length()!=0) {
         	params = "searchKey=" +searchKey + 
         	             "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");	
         }
         
         if(params.length()!=0) {
-            urlList = cp+"/notice?" + params;
+            urlList = cp+"/gnotice?" + params;
         }
         
         String paging = myUtil.paging(current_page, total_page, urlList);
@@ -122,7 +122,7 @@ public class NoticeController {
 		
 		return "group/notice";
 	}
-	@RequestMapping(value="/notice/created",method=RequestMethod.POST)
+	@RequestMapping(value="/gnotice/created",method=RequestMethod.POST)
 	public String createdSubmit(
 			GroupNotice dto, HttpSession session, Model model) throws Exception {
 
@@ -166,7 +166,7 @@ public class NoticeController {
 		
 		return "group/";
 	}
-	@RequestMapping(value="/notice/delete", method=RequestMethod.GET)
+	@RequestMapping(value="/gnotice/delete", method=RequestMethod.GET)
 	public String delete(
 			@RequestParam int num,
 			@RequestParam String page,
